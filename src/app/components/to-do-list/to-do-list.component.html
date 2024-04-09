@@ -1,0 +1,16 @@
+<div class="windov">
+    <div class="todo-container">
+        <div class="todo-header">Todo List</div>
+        <ul class="todo-list" *ngFor="let item of todos; let i = index">
+            <li class="todo-item">
+                <input type="checkbox" [(ngModel)]="item.completed" (change)="toggleCompletion(item.id)">
+                <input type="text" value="Buy a new gaming laptop" readonly [value]="item.title">
+                <button class="delete" (click)="deleteTodo(item.id)">Delete</button>
+            </li>
+        </ul>
+        <div class="fild-filling">
+            <input type="text" class="add-task-input" placeholder="Add your new todo" [(ngModel)]="newTodoTitle">
+            <button class="acept" (click)="addTodo(newTodoTitle)">Add task</button>
+        </div>
+    </div>
+</div>
