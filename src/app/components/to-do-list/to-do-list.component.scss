@@ -1,0 +1,80 @@
+// .windov{}    
+    
+.todo-container{
+    width:450px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid#ddd;
+    border-radius: 15px;
+    box-shadow:5px 8px #b9b9b9;;
+}
+
+.todo-header {
+    font-size: 24px;
+    color: #333;
+    text-align: left;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.todo-list{ 
+    list-style: none;
+    padding: 0;
+}
+
+.todo-item{
+    background: #ffffff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+}
+input{
+    border-radius: 7px;
+}
+
+.todo-item input[type="text"]{ 
+    border: 1px solid #ffffff;
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.add-task-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: 80%;
+    border-radius: 7px;
+}
+
+button{ 
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+    width: 20%;
+    border-radius: 3px;
+
+    transition: box-shadow 200ms linear;
+} 
+
+button:hover{
+    box-shadow: 0 .5em 1em 0 rgba(0, 0, 0, 0.15), 0 .4em .5em -.4em rgba(0, 0, 0, 0.4);
+}
+
+button.acept{
+    background-color: #5cb85c;
+}
+
+
+button.delete{ 
+    background-color: #d9534f;
+}
+
+div .fild-filling {
+    display: flex;
+    justify-content: space-between;
+}
