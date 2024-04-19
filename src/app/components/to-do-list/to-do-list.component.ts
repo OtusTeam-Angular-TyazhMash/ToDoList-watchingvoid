@@ -1,43 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { TodoService } from 'src/app/service/todo.service';
-import { Todo } from 'src/app/interfaces/todo';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-to-do-list',
+  selector: 'app-todo-list',
   templateUrl: './to-do-list.component.html',
   styleUrls: ['./to-do-list.component.scss']
 })
-export class ToDoListComponent implements OnInit {
-   todos?:Todo[];
-   newTodoTitle:string = ""
+export class ToDoListComponent {
+  todos = [
+    { id: 1, title: 'Купить новый игровой ноутбук', completed: false },
+    { id: 2, title: 'Прочитать книгу', completed: true },
+    { id: 3, title: 'Прочитать книгу', completed: true },
+  ];
+  newTodoTitle: string = '';
+  newItemText=false
 
-  constructor(private todoService: TodoService){}
-
-  ngOnInit(): void {
-    this.todos = this.todoService.getTodos();
-
-  }
-  addTodo(title: string): void {
-    const newTodo: Todo = {
-      id: Date.now(), 
-      title: title,
-      completed: false
-    };
-    if(title.length!==0){
-      this.todoService.addTodo(newTodo);
-      this.todos = this.todoService.getTodos();
+  toggleCompletion(id: number): void {
+    const todo = this.todos.find(todo => todo.id === id);
+    if (todo) {
+      todo.completed = !todo.completed;
     }
-    else alert("Пустое поле")
   }
 
   deleteTodo(id: number): void {
-    this.todoService.deleteTodo(id);
-    this.todos = this.todoService.getTodos();
+    this.todos = this.todos.filter(todo => todo.id !== id);
   }
 
-  toggleCompletion(id: number): void {
-    this.todoService.toggleCompletion(id);
-    this.todos = this.todoService.getTodos();
+  addTodo(): void {
+    if (this.newTodoTitle.trim()) {
+      const newId = this.todos.length > 0 ? Math.max(...this.todos.map(todo => todo.id)) + 1 : 1;
+      this.todos.push({ id: newId, title: this.newTodoTitle, completed: false });
+      this.newTodoTitle = '';
+    }
   }
 }
