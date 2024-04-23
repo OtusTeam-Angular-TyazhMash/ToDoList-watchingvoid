@@ -3,5 +3,5 @@
     <mat-form-field class="example-full-width">
         <input matInput class="todoitem-section" type="text" readonly [value]="item.title">
       </mat-form-field>
-    <button class="button button--delete" (click)="deleteTodo()">Delete</button>
+    <app-button [title]="'Delete'" (click)="deleteTodo()"></app-button>
 </li>
