@@ -37,6 +37,13 @@
 .button:disabled {
     opacity: 0.5;
 }
+.description-area{
+    width: 400px;
+	max-height: 150px;
+	min-height: 50px;
+    background-color:white;
+    margin: 20px 20px;
+}
 
 .loading-spiner{
     border: 4px solid rgba(0, 0, 0, .1);
@@ -50,4 +57,9 @@
 .loadin-container{
     display: flex;
     justify-content: center;
+}
+
+/* todo-list.component.css */
+.todo-list app-todo-list-item.selected {
+    background-color: lightgray;
 }

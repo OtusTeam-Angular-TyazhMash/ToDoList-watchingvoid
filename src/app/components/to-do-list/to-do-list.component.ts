@@ -7,14 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToDoListComponent implements OnInit {
   todos = [
-    { id: 1, title: 'Купить новый игровой ноутбук', completed: false },
-    { id: 2, title: 'Прочитать книгу', completed: true },
-    { id: 3, title: 'Прочитать книгу', completed: true },
+    { id: 1, title: 'Купить новый игровой ноутбук', completed: false, description:"Мама" },
+    { id: 2, title: 'Прочитать книгу', completed: true, description:"Папа" },
+    { id: 3, title: 'Прочитать книгу', completed: true, description:"Брат" },
   ];
   newTodoTitle: string = '';
-  newItemText:boolean = false
+  newItemDescription: string = '';
+
+  selectedItemId: number | null = null;
+
+  newItemText:boolean = false;
   isLoading:boolean = true;
   
+  public get description(): string 
+  {
+    let result = ''
+    let variable = this.todos.find((item: any) => item.id === this.selectedItemId)
+    if(variable) result = variable.description
+    return result
+  }
+
+  // public get description() { return this.todos.find((item: any) => item.id === this.selectedItemId)?.description }
 
   ngOnInit(){
     setTimeout(()=>{
@@ -23,22 +36,27 @@ export class ToDoListComponent implements OnInit {
   }
 
   toggleCompletion(id: number): void {
-    const todo = this.todos.find(todo => todo.id === id);
+    const todo = this.todos.find((todo:any) => todo.id === id);
     if (todo) {
       todo.completed = !todo.completed;
     }
   }
 
   deleteTodo(id: number): void {
-    this.todos = this.todos.filter(todo => todo.id !== id);
+    this.todos = this.todos.filter((todo:any) => todo.id !== id);
     console.log(this.isLoading);
   }
 
-  addTodo(value:string|void): void {
+  selectItem(id: number) {
+    this.selectedItemId = this.selectedItemId === id ? null : id;
+  }
+
+  addTodo(): void {
     if (this.newTodoTitle.trim()) {
-      const newId = this.todos.length > 0 ? Math.max(...this.todos.map(todo => todo.id)) + 1 : 1;
-      this.todos.push({ id: newId, title: this.newTodoTitle, completed: false });
+      const newId = this.todos.length > 0 ? Math.max(...this.todos.map((todo:any) => todo.id)) + 1 : 1;
+      this.todos.push({ id: newId, title: this.newTodoTitle, completed: false, description:this.newItemDescription });
       this.newTodoTitle = '';
+      this.newItemDescription = "";
     }
   }
 }
