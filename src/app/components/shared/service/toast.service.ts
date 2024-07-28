@@ -5,13 +5,19 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ToastService {
-  private messagesSubject = new Subject<string>();
+  private toastSubject = new Subject<string[]>();
+  toast$ = this.toastSubject.asObservable();
 
-  showToast(message: string): void {
-    this.messagesSubject.next(message);
+  private toasts: string[] = [];
+
+  showToast(message: string) {
+    this.toasts = [...this.toasts, message];
+    this.toastSubject.next(this.toasts);
+    setTimeout(() => this.removeToast(message), 3000); // Удаление уведомления через 3 секунды
   }
 
-  getMessages() {
-    return this.messagesSubject.asObservable();
+  private removeToast(message: string) {
+    this.toasts = this.toasts.filter(t => t !== message);
+    this.toastSubject.next(this.toasts);
   }
 }

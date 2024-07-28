@@ -1,7 +1,9 @@
-<li class="todo-item">
+<li class="todo-item" (dblclick)="isEditing = true">
   <input type="checkbox" [(ngModel)]="item.completed" (change)="toggleCompletion()">
   <mat-form-field class="example-full-width">
-    <input matInput class="todoitem-section" type="text" readonly [value]="item.title">
-  </mat-form-field>
-  <app-button [title]="'Delete'" [type]="'delete'" (click)="deleteTodo()"></app-button>
+      <input *ngIf="!isEditing" matInput class="todoitem-section" type="text" readonly [value]="item.title">
+      <input *ngIf="isEditing" matInput class="todoitem-section" type="text" [(ngModel)]="item.title">
+    </mat-form-field>
+  <app-button *ngIf="isEditing" [title]="'Save'" (click)="saveEdit()"></app-button>
+  <app-button [title]="'Delete'" (click)="deleteTodo()"></app-button>
 </li>

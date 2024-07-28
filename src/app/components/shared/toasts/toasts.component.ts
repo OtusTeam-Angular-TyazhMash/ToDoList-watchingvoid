@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastService } from '../service/toast.service';
+import { ToastService } from '../service/toast.service'; // Убедитесь, что путь корректен
 
 @Component({
   selector: 'app-toasts',
@@ -7,18 +7,13 @@ import { ToastService } from '../service/toast.service';
   styleUrls: ['./toasts.component.scss']
 })
 export class ToastsComponent implements OnInit {
-  messages: string[] = [];
+  toasts: string[] = [];
 
   constructor(private toastService: ToastService) { }
 
   ngOnInit(): void {
-    this.toastService.getMessages().subscribe(message => {
-      if (message) {
-        this.messages.push(message);
-        setTimeout(() => {
-          this.messages.shift(); // Remove the oldest message
-        }, 3000); // Adjust duration as needed
-      }
+    this.toastService.toast$.subscribe(toasts => {
+      this.toasts = toasts;
     });
   }
 }
