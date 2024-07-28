@@ -1,7 +1,7 @@
-<li class="todo-item" class="todoitem-section">
-    <input type="checkbox" [(ngModel)]="item.completed" (change)="toggleCompletion()">
-    <mat-form-field class="example-full-width">
-        <input matInput class="todoitem-section" type="text" readonly [value]="item.title">
-      </mat-form-field>
-    <app-button [title]="'Delete'" (click)="deleteTodo()"></app-button>
+<li class="todo-item">
+  <input type="checkbox" [(ngModel)]="item.completed" (change)="toggleCompletion()">
+  <mat-form-field class="example-full-width">
+    <input matInput class="todoitem-section" type="text" readonly [value]="item.title">
+  </mat-form-field>
+  <app-button [title]="'Delete'" [type]="'delete'" (click)="deleteTodo()"></app-button>
 </li>
