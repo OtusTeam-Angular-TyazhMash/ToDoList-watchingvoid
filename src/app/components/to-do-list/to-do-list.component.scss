@@ -63,3 +63,13 @@
 .todo-list app-todo-list-item.selected {
     background-color: lightgray;
 }
+
+.todo-context{
+    width: 100%;
+    margin-right: 11px;
+    min-height: 44px;
+	max-height: 300px;
+    resize: vertical;
+    border: 1px solid #4f146d;
+    border-radius: 5px;
+}

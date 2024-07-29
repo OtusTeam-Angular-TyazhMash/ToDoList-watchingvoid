@@ -14,13 +14,14 @@
           [isEditing]="item.id === selectedItemId"
           appTooltip
       ></app-todo-list-item>
-      <div class="description-area" *ngIf="selectedItemId !== null">
+      <!-- <div class="description-area" *ngIf="selectedItemId !== null">
           {{ getSelectedItemDescription() }}
-      </div>
+      </div> -->
   </ul>
   <div class="field-filling">
       <input matInput type="text" class="add-task-input" placeholder="Add your new todo" [(ngModel)]="newTodoTitle">
-      <textarea matInput style="width: 100%;" [(ngModel)]="newItemDescription" placeholder="Add a description"></textarea>
+      <textarea matInput class="todo-context" [(ngModel)]="newItemDescription" placeholder="Add a description"></textarea>
       <app-button mat-button [title]="'Add Task'" [type]="'add'" [disabled]="!newTodoTitle" (click)="addTodo()"></app-button>
   </div>
 </div>
+<app-toasts></app-toasts>

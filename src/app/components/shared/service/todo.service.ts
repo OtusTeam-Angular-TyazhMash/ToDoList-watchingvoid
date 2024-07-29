@@ -12,7 +12,7 @@ export interface TodoItem {
   providedIn: 'root'
 })
 export class TodoService {
-  private todosSubject = new BehaviorSubject<TodoItem[]>([
+  public todosSubject = new BehaviorSubject<TodoItem[]>([
     { id: 1, title: 'Купить новый игровой ноутбук', completed: false, description: "Мама" },
     { id: 2, title: 'Прочитать книгу', completed: true, description: "Папа" },
     { id: 3, title: 'Прочитать книгу', completed: true, description: "Брат" },
