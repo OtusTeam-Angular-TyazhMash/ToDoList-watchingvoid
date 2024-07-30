@@ -1,14 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastService } from '../shared/service/toast.service';
-import { TodoService } from '../shared/service/todo.service';
-import {  Observable, find,filter, } from 'rxjs';
-
-export interface TodoItem {
-  id: number;
-  title: string;
-  completed: boolean;
-  description: string;
-}
+import { ToastService } from '../shared/service/toast.service'; // Убедитесь, что путь корректен
 
 @Component({
   selector: 'app-todo-list',
