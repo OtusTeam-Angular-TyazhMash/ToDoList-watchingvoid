@@ -1,43 +1,32 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-
-export interface TodoItem {
-  id: number;
-  title: string;
-  completed: boolean;
-  description: string;
-}
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  private todosSubject = new BehaviorSubject<TodoItem[]>([
-    { id: 1, title: 'Купить новый игровой ноутбук', completed: false, description: "Мама" },
-    { id: 2, title: 'Прочитать книгу', completed: true, description: "Папа" },
-    { id: 3, title: 'Прочитать книгу', completed: true, description: "Брат" },
-  ]);
+  private apiUrl = 'http://localhost:3000/todos';
 
-  todos$: Observable<TodoItem[]> = this.todosSubject.asObservable();
+  constructor(private http: HttpClient) {}
 
-  getTodos(): TodoItem[] {
-    return this.todosSubject.getValue();
+  getTodos(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
 
-  addTodo(newTodo: TodoItem): void {
-    const todos = this.getTodos();
-    this.todosSubject.next([...todos, newTodo]);
+  addTodo(todo: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, todo);
   }
 
-  updateTodo(updatedTodo: TodoItem): void {
-    const todos = this.getTodos().map(todo => 
-      todo.id === updatedTodo.id ? updatedTodo : todo
-    );
-    this.todosSubject.next(todos);
+  updateStatus(id: number, status: string): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/${id}`, { status });
   }
 
-  deleteTodo(id: number): void {
-    const todos = this.getTodos().filter(todo => todo.id !== id);
-    this.todosSubject.next(todos);
+  toggleCompletion(id: number): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/${id}`, { completed: true });
+  }
+
+  deleteTodo(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 }
