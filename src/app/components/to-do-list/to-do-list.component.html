@@ -12,21 +12,23 @@
     </mat-select>
   </mat-form-field>
   <ul class="todo-list" *ngIf="!isLoading">
-    <app-todo-list-item 
-      *ngFor="let item of todos | filterTodos:filterStatus"
-      [item]="item"
-      (delete)="deleteTodo($event)"
-      (toggle)="toggleCompletion($event)"
-      (click)="selectItem(item.id)"
-      appTooltip
-    ></app-todo-list-item>
-    <div class="description-area" *ngIf="selectedItemId !== null">
-      {{ getSelectedItemDescription() }}
-    </div>
+      <app-todo-list-item 
+          *ngFor="let item of todos"
+          [item]="item"
+          (delete)="deleteTodo($event)"
+          (toggle)="toggleCompletion($event)"
+          (dblclick)="selectItem(item.id)"
+          [isEditing]="item.id === selectedItemId"
+          appTooltip
+      ></app-todo-list-item>
+      <div class="description-area" *ngIf="selectedItemId !== null">
+          {{ getSelectedItemDescription() }}
+      </div>
   </ul>
-  <app-todo-create-item 
-    (add)="addTodo()"
-    [(title)]="newTodoTitle"
-    [(description)]="newItemDescription">
-  </app-todo-create-item>
+  <div class="field-filling">
+      <input matInput type="text" class="add-task-input" placeholder="Add your new todo" [(ngModel)]="newTodoTitle">
+      <textarea matInput style="width: 100%;" [(ngModel)]="newItemDescription" placeholder="Add a description"></textarea>
+      <app-button mat-button [title]="'Add Task'" [type]="'add'" [disabled]="!newTodoTitle" (click)="addTodo()"></app-button>
+  </div>
 </div>
+<app-toasts></app-toasts>

@@ -19,6 +19,7 @@ export class ButtonComponent {
   getClass() {
     if(this.title == 'Add Task') return 'button--add'
     if(this.title == 'Delete') return 'button--delete'
+    if(this.title == 'Save') return 'button--save'
     return ''
   }
 }

@@ -7,6 +7,7 @@ import { TodoService } from '../shared/service/todo.service';
   templateUrl: './to-do-list.component.html',
   styleUrls: ['./to-do-list.component.scss']
 })
+
 export class ToDoListComponent implements OnInit {
   todos = [
     { id: 1, title: 'Купить новый игровой ноутбук', completed: false, description: 'Мама', status: 'InProgress' },
@@ -25,17 +26,19 @@ export class ToDoListComponent implements OnInit {
     setTimeout(() => {
       this.isLoading = false;
     }, 500);
+    this.todoService.todosSubject.subscribe(resp => this.todos = resp)
   }
 
   toggleCompletion(id: number): void {
-    const todo = this.todos.find(todo => todo.id === id);
+    const todo = this.todos.find((todo:any) => todo.id === id);
     if (todo) {
+      console.log(todo)
       todo.completed = !todo.completed;
     }
   }
 
   deleteTodo(id: number): void {
-    this.todos = this.todos.filter(todo => todo.id !== id);
+    this.todos = this.todos.filter((todo:any) => todo.id !== id);
     this.toastService.showToast('Todo item deleted');
   }
 
