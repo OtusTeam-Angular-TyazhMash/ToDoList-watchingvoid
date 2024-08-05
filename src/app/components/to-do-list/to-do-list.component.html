@@ -14,9 +14,9 @@
           [isEditing]="item.id === selectedItemId"
           appTooltip
       ></app-todo-list-item>
-      <!-- <div class="description-area" *ngIf="selectedItemId !== null">
+      <div class="description-area" *ngIf="selectedItemId !== null">
           {{ getSelectedItemDescription() }}
-      </div> -->
+      </div>
   </ul>
   <div class="field-filling">
       <input matInput type="text" class="add-task-input" placeholder="Add your new todo" [(ngModel)]="newTodoTitle">
