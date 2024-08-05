@@ -21,12 +21,14 @@ export class ToDoListComponent implements OnInit {
   filterStatus: string | null = null; // Фильтр для статуса
 
   constructor(private toastService: ToastService, private todoService: TodoService) { }
+  todos$: Observable<TodoItem[]> = this.todoService.todosSubject.asObservable();
+  public todos:any
 
   ngOnInit() {
     setTimeout(() => {
       this.isLoading = false;
     }, 500);
-    this.todoService.todosSubject.subscribe(resp => this.todos = resp)
+    this.todoService.todosSubject.subscribe((resp:any) => this.todos = resp)
   }
 
   toggleCompletion(id: number): void {
