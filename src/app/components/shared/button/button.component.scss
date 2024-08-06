@@ -1,0 +1,22 @@
+.button {
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: box-shadow 200ms linear;
+  }
+  
+  .button--add {
+    background-color: green;
+  }
+  
+  .button--delete {
+    background-color: red;
+  }
+  
+  .button:disabled {
+    opacity: 0.5;
+  }
+  

@@ -1,43 +1,68 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { TodoService } from 'src/app/service/todo.service';
-import { Todo } from 'src/app/interfaces/todo';
+import { ToastService } from '../shared/service/toast.service';
+import { TodoService } from '../shared/service/todo.service';
 
 @Component({
   selector: 'app-to-do-list',
   templateUrl: './to-do-list.component.html',
   styleUrls: ['./to-do-list.component.scss']
 })
+
 export class ToDoListComponent implements OnInit {
-   todos?:Todo[];
-   newTodoTitle:string = ""
+  todos = [
+    { id: 1, title: 'Купить новый игровой ноутбук', completed: false, description: 'Мама', status: 'InProgress' },
+    { id: 2, title: 'Прочитать книгу', completed: true, description: 'Папа', status: 'Completed' },
+    { id: 3, title: 'Прочитать книгу', completed: true, description: 'Брат', status: 'InProgress' },
+  ];
+  newTodoTitle: string = '';
+  newItemDescription: string = '';
+  selectedItemId: number | null = null;
+  isLoading: boolean = true;
+  filterStatus: string | null = null; // Фильтр для статуса
 
-  constructor(private todoService: TodoService){}
+  constructor(private toastService: ToastService, private todoService: TodoService) { }
+  todos$: Observable<TodoItem[]> = this.todoService.todosSubject.asObservable();
+  public todos:any
 
-  ngOnInit(): void {
-    this.todos = this.todoService.getTodos();
-
-  }
-  addTodo(title: string): void {
-    const newTodo: Todo = {
-      id: Date.now(), 
-      title: title,
-      completed: false
-    };
-    if(title.length!==0){
-      this.todoService.addTodo(newTodo);
-      this.todos = this.todoService.getTodos();
-    }
-    else alert("Пустое поле")
-  }
-
-  deleteTodo(id: number): void {
-    this.todoService.deleteTodo(id);
-    this.todos = this.todoService.getTodos();
+  ngOnInit() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 500);
+    this.todoService.todosSubject.subscribe((resp:any) => this.todos = resp)
   }
 
   toggleCompletion(id: number): void {
-    this.todoService.toggleCompletion(id);
-    this.todos = this.todoService.getTodos();
+    const todo = this.todos.find((todo:any) => todo.id === id);
+    if (todo) {
+      console.log(todo)
+      todo.completed = !todo.completed;
+    }
+  }
+
+  deleteTodo(id: number): void {
+    this.todos = this.todos.filter((todo:any) => todo.id !== id);
+    this.toastService.showToast('Todo item deleted');
+  }
+
+  selectItem(id: number): void {
+    this.selectedItemId = this.selectedItemId === id ? null : id;
+  }
+
+  addTodo(): void {
+    if (this.newTodoTitle.trim()) {
+      const newId = this.todos.length > 0 ? Math.max(...this.todos.map(todo => todo.id)) + 1 : 1;
+      this.todos.push({ id: newId, title: this.newTodoTitle, completed: false, description: this.newItemDescription, status: 'InProgress' });
+      this.newTodoTitle = '';
+      this.newItemDescription = '';
+      this.toastService.showToast('Todo item added');
+    }
+  }
+
+  getSelectedItemDescription(): string | undefined {
+    return this.todos.find(item => item.id === this.selectedItemId)?.description;
+  }
+
+  filterTodos(status: string | null): void {
+    this.filterStatus = status;
   }
 }
