@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastService } from '../service/toast.service'; // Убедитесь, что путь корректен
+import { ToastService } from '../service/toast.service';
 
 @Component({
   selector: 'app-toasts',
