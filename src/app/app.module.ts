@@ -13,21 +13,34 @@ import { ToastService } from './components/shared/service/toast.service';
 import { TodoService } from './components/shared/service/todo.service';
 import { TooltipDirective } from './components/shared/tooltip.directive';
 import { SharedModule } from './components/shared/shared.module';
-import { FilterTodosPipe } from './components/filter-todos.pipe'; // Импортируйте Pipe
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TodoCreateItemComponent } from './components/todo-create-item/todo-create-item.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToDoListComponent,
     ToDoListItemComponent,
-    FilterTodosPipe // Добавьте Pipe в декларации
+    TodoCreateItemComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     MatInputModule,
     MatSelectModule, // Импортируйте MatSelectModule
-    SharedModule
+    SharedModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatCheckboxModule,
+    HttpClientModule,
   ],
   providers: [TodoService, ToastService],
   bootstrap: [AppComponent]

@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button/button.component';
 import { TooltipDirective } from './tooltip.directive';
 import { ToastsComponent } from './toasts/toasts.component';
-import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { FilterTodosPipe } from '../filter-todos.pipe';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -14,11 +15,16 @@ import { FilterTodosPipe } from '../filter-todos.pipe';
     LoadingSpinnerComponent,
     FilterTodosPipe,
   ],
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MatProgressSpinnerModule
+  ],
   exports: [
     ButtonComponent,
+    TooltipDirective,
     ToastsComponent,
-    TooltipDirective
+    LoadingSpinnerComponent,
+    FilterTodosPipe,
   ]
 })
 export class SharedModule { }

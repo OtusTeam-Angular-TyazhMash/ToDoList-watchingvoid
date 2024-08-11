@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastService } from '../shared/service/toast.service';
 import { TodoService } from '../shared/service/todo.service';
 
 @Component({
@@ -7,62 +6,87 @@ import { TodoService } from '../shared/service/todo.service';
   templateUrl: './to-do-list.component.html',
   styleUrls: ['./to-do-list.component.scss']
 })
-
 export class ToDoListComponent implements OnInit {
-  todos = [
-    { id: 1, title: 'Купить новый игровой ноутбук', completed: false, description: 'Мама', status: 'InProgress' },
-    { id: 2, title: 'Прочитать книгу', completed: true, description: 'Папа', status: 'Completed' },
-    { id: 3, title: 'Прочитать книгу', completed: true, description: 'Брат', status: 'InProgress' },
-  ];
+  todos: any[] = [];
   newTodoTitle: string = '';
   newItemDescription: string = '';
   selectedItemId: number | null = null;
   isLoading: boolean = true;
-  filterStatus: string | null = null; // Фильтр для статуса
+  statusFilter: string | null = null;
 
-  constructor(private toastService: ToastService, private todoService: TodoService) { }
-  todos$: Observable<TodoItem[]> = this.todoService.todosSubject.asObservable();
-  public todos:any
+  constructor(private todoService: TodoService) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 500);
-    this.todoService.todosSubject.subscribe((resp:any) => this.todos = resp)
+    this.loadTodos();
   }
 
-  toggleCompletion(id: number): void {
-    const todo = this.todos.find((todo:any) => todo.id === id);
-    if (todo) {
-      console.log(todo)
-      todo.completed = !todo.completed;
+  loadTodos() {
+    this.todoService.getTodos().subscribe(todos => {
+      this.todos = todos;
+      this.isLoading = false;
+    });
+  }
+
+  addTodo() {
+    if (this.newTodoTitle.trim()) {
+      const newTodo = {
+        title: this.newTodoTitle,
+        description: this.newItemDescription,
+        status: 'InProgress'
+      };
+      this.todoService.addTodo(newTodo).subscribe(todo => {
+        this.todos.push(todo);
+        this.newTodoTitle = '';
+        this.newItemDescription = '';
+      });
     }
   }
 
-  deleteTodo(id: number): void {
-    this.todos = this.todos.filter((todo:any) => todo.id !== id);
-    this.toastService.showToast('Todo item deleted');
+  updateTodo(id: number, updatedTodo: any) {
+    this.todoService.updateTodo(id, updatedTodo).subscribe(() => {
+      const index = this.todos.findIndex(todo => todo.id === id);
+      if (index !== -1) {
+        this.todos[index] = { ...this.todos[index], ...updatedTodo };
+      }
+    });
   }
 
-  selectItem(id: number): void {
+  deleteTodo(id: number) {
+    this.todoService.deleteTodo(id).subscribe(() => {
+      this.todos = this.todos.filter(todo => todo.id !== id);
+    });
+  }
+
+  selectItem(id: number) {
     this.selectedItemId = this.selectedItemId === id ? null : id;
   }
 
-  addTodo(): void {
-    if (this.newTodoTitle.trim()) {
-      const newId = this.todos.length > 0 ? Math.max(...this.todos.map(todo => todo.id)) + 1 : 1;
-      this.todos.push({ id: newId, title: this.newTodoTitle, completed: false, description: this.newItemDescription, status: 'InProgress' });
-      this.newTodoTitle = '';
-      this.newItemDescription = '';
-      this.toastService.showToast('Todo item added');
-    }
+  updateItemStatus(id: number, status: string) {
+    const updatedTodo = { status };
+    this.updateTodo(id, updatedTodo);
   }
 
+  // Метод для фильтрации по статусу
+  get filteredTodos() {
+    if (this.statusFilter === null) {
+      return this.todos;
+    }
+    return this.todos.filter(todo => todo.status === this.statusFilter);
+  }
+
+  // Метод для получения описания выбранного элемента
   getSelectedItemDescription(): string | undefined {
     return this.todos.find(item => item.id === this.selectedItemId)?.description;
   }
-
-  filterTodos(status: string | null): void {
-    this.filterStatus = status;
+  toggleCompletion(id: number) {
+    const todo = this.todos.find(todo => todo.id === id);
+    if (todo) {
+      this.updateTodo(id, { completed: !todo.completed });
+    }
   }
+  editItem(id: number) {
+    // В этом методе можно открыть форму редактирования или что-то подобное
+    console.log('Editing item with id:', id);
+  }
+  
 }

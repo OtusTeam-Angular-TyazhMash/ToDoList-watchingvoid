@@ -1,0 +1,8 @@
+{
+    "todos": [
+      { "id": 1, "title": "Купить новый игровой ноутбук", "completed": false, "description": "Мама", "status": "InProgress" },
+      { "id": 2, "title": "Прочитать книгу", "completed": true, "description": "Папа", "status": "Completed" },
+      { "id": 3, "title": "Прочитать книгу", "completed": true, "description": "Брат", "status": "InProgress" }
+    ]
+  }
+  

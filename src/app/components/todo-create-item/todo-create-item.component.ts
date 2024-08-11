@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-create-item',
@@ -6,11 +7,25 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./todo-create-item.component.scss']
 })
 export class TodoCreateItemComponent {
-  @Input() title: string = '';
-  @Input() description: string = '';
-  @Output() save = new EventEmitter<void>();
+  newTodoTitle: string = '';
+  newItemDescription: string = '';
 
-  onSave() {
-    this.save.emit();
+  @Output() add = new EventEmitter<{ title: string, description: string }>();
+
+  addTodo() {
+    if (this.newTodoTitle.trim()) {
+      this.add.emit({ title: this.newTodoTitle, description: this.newItemDescription });
+      this.newTodoTitle = '';
+      this.newItemDescription = '';
+    }
+  }
+  onSubmit(): void {
+    // Логика для обработки отправки формы
+    console.log('Title:', this.newTodoTitle);
+    console.log('Description:', this.newItemDescription);
+
+    // Очистить поля формы после отправки
+    this.newTodoTitle = '';
+    this.newItemDescription = '';
   }
 }

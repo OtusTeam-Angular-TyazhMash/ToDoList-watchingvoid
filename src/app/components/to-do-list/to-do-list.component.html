@@ -3,32 +3,32 @@
   <div *ngIf="isLoading" class="loading-container">
     <app-loading-spinner></app-loading-spinner>
   </div>
-  <mat-form-field>
-    <mat-label>Status Filter</mat-label>
-    <mat-select [(ngModel)]="filterStatus" (ngModelChange)="filterTodos($event)">
-      <mat-option [value]="null">All</mat-option>
-      <mat-option value="InProgress">In Progress</mat-option>
-      <mat-option value="Completed">Completed</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div class="filter-controls">
+    <mat-form-field appearance="fill">
+      <mat-label>Filter by status</mat-label>
+      <mat-select [(value)]="statusFilter">
+        <mat-option value="InProgress">In Progress</mat-option>
+        <mat-option value="Completed">Completed</mat-option>
+        <mat-option value="">All</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <ul class="todo-list" *ngIf="!isLoading">
-      <app-todo-list-item 
-          *ngFor="let item of todos"
-          [item]="item"
-          (delete)="deleteTodo($event)"
-          (toggle)="toggleCompletion($event)"
-          (dblclick)="selectItem(item.id)"
-          [isEditing]="item.id === selectedItemId"
-          appTooltip
-      ></app-todo-list-item>
-      <div class="description-area" *ngIf="selectedItemId !== null">
-          {{ getSelectedItemDescription() }}
-      </div>
+    <app-todo-list-item 
+      *ngFor="let item of filteredTodos"
+      [item]="item"
+      (delete)="deleteTodo($event)"
+      (toggle)="toggleCompletion($event)"
+      (dblclick)="editItem(item.id)"
+      (statusChange)="updateItemStatus(item.id, $event)"
+    ></app-todo-list-item>
+    <div class="description-area" *ngIf="selectedItemId !== null">
+      {{ getSelectedItemDescription() }}
+    </div>
   </ul>
   <div class="field-filling">
-      <input matInput type="text" class="add-task-input" placeholder="Add your new todo" [(ngModel)]="newTodoTitle">
-      <textarea matInput style="width: 100%;" [(ngModel)]="newItemDescription" placeholder="Add a description"></textarea>
-      <app-button mat-button [title]="'Add Task'" [type]="'add'" [disabled]="!newTodoTitle" (click)="addTodo()"></app-button>
+    <input matInput type="text" class="add-task-input" placeholder="Add your new todo" [(ngModel)]="newTodoTitle">
+    <textarea matInput style="width: 100%;" [(ngModel)]="newItemDescription" placeholder="Add a description"></textarea>
+    <app-button mat-button [type]="'add'" [disabled]="!newTodoTitle" (click)="addTodo()"></app-button>
   </div>
 </div>
-<app-toasts></app-toasts>
