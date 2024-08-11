@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TodoService } from '../shared/service/todo.service';
+import { Todo } from '../shared/models/todo.model';
 
 @Component({
   selector: 'app-to-do-list',
@@ -7,32 +9,38 @@ import { TodoService } from '../shared/service/todo.service';
   styleUrls: ['./to-do-list.component.scss']
 })
 export class ToDoListComponent implements OnInit {
-  todos: any[] = [];
+  todos: Todo[] = [];
   newTodoTitle: string = '';
   newItemDescription: string = '';
   selectedItemId: number | null = null;
   isLoading: boolean = true;
   statusFilter: string | null = null;
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService, private route: ActivatedRoute, private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadTodos();
+    this.route.params.subscribe(params => {
+      const id = +params['id'];
+      this.selectedItemId = id || null;
+    });
   }
 
-  loadTodos() {
+  loadTodos(): void {
+    this.isLoading = true;
     this.todoService.getTodos().subscribe(todos => {
       this.todos = todos;
       this.isLoading = false;
     });
   }
 
-  addTodo() {
+  addTodo(): void {
     if (this.newTodoTitle.trim()) {
-      const newTodo = {
+      const newTodo: Todo = {
         title: this.newTodoTitle,
         description: this.newItemDescription,
-        status: 'InProgress'
+        status: 'InProgress',
+        completed: false
       };
       this.todoService.addTodo(newTodo).subscribe(todo => {
         this.todos.push(todo);
@@ -42,7 +50,7 @@ export class ToDoListComponent implements OnInit {
     }
   }
 
-  updateTodo(id: number, updatedTodo: any) {
+  updateTodo(id: number, updatedTodo: Partial<Todo>): void {
     this.todoService.updateTodo(id, updatedTodo).subscribe(() => {
       const index = this.todos.findIndex(todo => todo.id === id);
       if (index !== -1) {
@@ -51,23 +59,26 @@ export class ToDoListComponent implements OnInit {
     });
   }
 
-  deleteTodo(id: number) {
+  deleteTodo(id: number): void {
     this.todoService.deleteTodo(id).subscribe(() => {
       this.todos = this.todos.filter(todo => todo.id !== id);
     });
   }
 
-  selectItem(id: number) {
-    this.selectedItemId = this.selectedItemId === id ? null : id;
+  selectItem(id: number): void {
+    this.selectedItemId = id;
+    this.router.navigate(['tasks', id]);
   }
 
-  updateItemStatus(id: number, status: string) {
-    const updatedTodo = { status };
-    this.updateTodo(id, updatedTodo);
+  updateItemStatus(id: number | undefined, status: string): void {
+    if (id !== undefined) {
+      // Теперь TypeScript знает, что id определен
+      console.log('Updating item status for id:', id, 'to', status);
+    }
   }
 
   // Метод для фильтрации по статусу
-  get filteredTodos() {
+  get filteredTodos(): Todo[] {
     if (this.statusFilter === null) {
       return this.todos;
     }
@@ -78,15 +89,18 @@ export class ToDoListComponent implements OnInit {
   getSelectedItemDescription(): string | undefined {
     return this.todos.find(item => item.id === this.selectedItemId)?.description;
   }
-  toggleCompletion(id: number) {
+
+  toggleCompletion(id: number): void {
     const todo = this.todos.find(todo => todo.id === id);
     if (todo) {
       this.updateTodo(id, { completed: !todo.completed });
     }
   }
-  editItem(id: number) {
-    // В этом методе можно открыть форму редактирования или что-то подобное
-    console.log('Editing item with id:', id);
+
+  editItem(id: number | undefined): void {
+    if (id !== undefined) {
+      // Теперь TypeScript знает, что id определен
+      console.log('Editing item with id:', id);
+    }
   }
-  
 }

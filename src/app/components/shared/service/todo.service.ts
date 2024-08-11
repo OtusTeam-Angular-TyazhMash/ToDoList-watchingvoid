@@ -3,20 +3,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-interface Todo {
-  id?: number; // id может быть необязательным при создании
-  title: string;
-  completed?: boolean; // completed может быть необязательным при создании
-  description: string;
-  status: string;
-}
+import { Todo } from '../models/todo.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  private apiUrl = 'http://localhost:5000/todos';
+  private apiUrl = 'http://localhost:3000/todos';//json-server --watch db.json
 
   constructor(private http: HttpClient) { }
 
@@ -24,8 +17,8 @@ export class TodoService {
     return this.http.get<Todo[]>(this.apiUrl);
   }
 
-  getTodoById(id: number): Observable<Todo> {
-    return this.http.get<Todo>(`${this.apiUrl}/${id}`);
+  getTodoById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
   addTodo(todo: Omit<Todo, 'id' | 'completed'>): Observable<Todo> {

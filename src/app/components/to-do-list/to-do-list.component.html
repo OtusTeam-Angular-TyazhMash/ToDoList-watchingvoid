@@ -6,7 +6,7 @@
   <div class="filter-controls">
     <mat-form-field appearance="fill">
       <mat-label>Filter by status</mat-label>
-      <mat-select [(value)]="statusFilter">
+      <mat-select [(ngModel)]="statusFilter">
         <mat-option value="InProgress">In Progress</mat-option>
         <mat-option value="Completed">Completed</mat-option>
         <mat-option value="">All</mat-option>
@@ -15,16 +15,14 @@
   </div>
   <ul class="todo-list" *ngIf="!isLoading">
     <app-todo-list-item 
-      *ngFor="let item of filteredTodos"
-      [item]="item"
-      (delete)="deleteTodo($event)"
-      (toggle)="toggleCompletion($event)"
-      (dblclick)="editItem(item.id)"
-      (statusChange)="updateItemStatus(item.id, $event)"
-    ></app-todo-list-item>
-    <div class="description-area" *ngIf="selectedItemId !== null">
-      {{ getSelectedItemDescription() }}
-    </div>
+    *ngFor="let item of filteredTodos"
+    [item]="item"
+    (delete)="deleteTodo($event)"
+    (toggle)="toggleCompletion($event)"
+    (dblclick)="editItem(item.id)"
+    (statusChange)="updateItemStatus(item.id, $event)"
+  ></app-todo-list-item>
+  <router-outlet></router-outlet> <!-- Для отображения ToDoItemViewComponent -->
   </ul>
   <div class="field-filling">
     <input matInput type="text" class="add-task-input" placeholder="Add your new todo" [(ngModel)]="newTodoTitle">

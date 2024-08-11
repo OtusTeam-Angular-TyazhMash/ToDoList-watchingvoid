@@ -20,6 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TodoCreateItemComponent } from './components/todo-create-item/todo-create-item.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
+import { ToDoItemViewComponent } from './components/to-do-item-view/to-do-item-view.component';
+import { AppRoutingModule } from './app-routing.module';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     ToDoListComponent,
     ToDoListItemComponent,
     TodoCreateItemComponent,
+    ToDoItemViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MatCheckboxModule,
     HttpClientModule,
+    AppRoutingModule
   ],
   providers: [TodoService, ToastService],
   bootstrap: [AppComponent]
