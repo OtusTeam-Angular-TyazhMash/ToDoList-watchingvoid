@@ -1,0 +1,9 @@
+<form (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput [(ngModel)]="newTodoTitle" name="title" placeholder="Title">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="newItemDescription" name="description" placeholder="Description">
+  </mat-form-field>
+  <button type="submit">Add Todo</button>
+</form>

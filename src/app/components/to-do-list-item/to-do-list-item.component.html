@@ -1,0 +1,14 @@
+<li class="todo-item">
+  <input type="checkbox" [(ngModel)]="item.completed" (change)="toggleCompletion()">
+  <mat-form-field class="example-full-width">
+    <input matInput *ngIf="!isEditing" type="text" [value]="item.title" readonly>
+    <input matInput *ngIf="isEditing" type="text" [(ngModel)]="newTitle">
+  </mat-form-field>
+  <app-button *ngIf="!isEditing" mat-button [title]="'Edit'" (click)="editItem()"></app-button>
+  <app-button *ngIf="isEditing" mat-button [title]="'Save'" (click)="saveEdit()"></app-button>
+  <app-button *ngIf="isEditing" mat-button [title]="'Cancel'" (click)="cancelEdit()"></app-button>
+  <mat-checkbox (change)="changeStatus(item.status === 'InProgress' ? 'Completed' : 'InProgress')">
+    {{ item.status }}
+  </mat-checkbox>
+  <app-button [title]="'Delete'" (click)="deleteTodo()"></app-button>
+</li>
