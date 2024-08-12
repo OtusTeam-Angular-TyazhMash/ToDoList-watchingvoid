@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent {
-  @Input() type: string = '';
+  @Input() title: string = 'Default Title';
+  @Input() color: string = 'primary'; // Это может быть цвет из вашей темы или кастомный цвет
   @Input() disabled: boolean = false;
 }

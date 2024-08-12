@@ -27,6 +27,6 @@
   <div class="field-filling">
     <input matInput type="text" class="add-task-input" placeholder="Add your new todo" [(ngModel)]="newTodoTitle">
     <textarea matInput style="width: 100%;" [(ngModel)]="newItemDescription" placeholder="Add a description"></textarea>
-    <app-button mat-button [type]="'add'" [disabled]="!newTodoTitle" (click)="addTodo()"></app-button>
+    <app-button mat-button [title]="'Submit'" [color]="'green'" [disabled]="!newTodoTitle" (click)="addTodo()"></app-button>
   </div>
 </div>
