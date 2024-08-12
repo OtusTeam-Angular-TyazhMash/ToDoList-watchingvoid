@@ -1,0 +1,18 @@
+<div class="task-board">
+  <div class="column">
+    <h3>In Progress</h3>
+    <ul>
+      <li *ngFor="let task of inProgressTasks" class="in-progress">
+        {{ task.title }}
+      </li>
+    </ul>
+  </div>
+  <div class="column">
+    <h3>Completed</h3>
+    <ul>
+      <li *ngFor="let task of completedTasks" class="completed">
+        {{ task.title }}
+      </li>
+    </ul>
+  </div>
+</div>

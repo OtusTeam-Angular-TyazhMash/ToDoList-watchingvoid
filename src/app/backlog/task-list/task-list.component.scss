@@ -1,0 +1,33 @@
+@import '../../../styles/variables.scss';
+
+.task-list {
+  width: 30%;
+  background-color: $background-color;
+  padding: $padding-medium;
+  overflow-y: auto;
+  border-right: 1px solid $border-color;
+
+  h2 {
+    margin-bottom: $padding-medium;
+    color: $text-color;
+    font-size: $font-size-large;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: $padding-small;
+      margin-bottom: $padding-small;
+      background-color: $white-color;
+      border-radius: $border-radius;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $hover-color;
+      }
+    }
+  }
+}

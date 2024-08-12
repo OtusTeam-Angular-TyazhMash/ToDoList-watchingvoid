@@ -1,0 +1,57 @@
+@import '../../../styles/variables.scss';
+
+.task-detail {
+  width: 70%;
+  padding: $padding-medium;
+  background-color: $white-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+
+  h2 {
+    margin-bottom: $padding-small;
+    font-size: $font-size-large;
+    color: $primary-color;
+  }
+
+  label {
+    font-size: $font-size-medium;
+    color: $text-color;
+  }
+
+  .edit-input,
+  .edit-textarea,
+  .status-select {
+    width: 100%;
+    padding: $padding-small;
+    margin-bottom: $padding-small;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    font-size: $font-size-medium;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    margin-bottom: $padding-medium;
+
+    .status-label {
+      font-size: $font-size-small;
+      color: $text-color;
+      margin-right: $padding-small;
+    }
+  }
+
+  .save-button {
+    background-color: $primary-color;
+    color: $white-color;
+    padding: $padding-small $padding-medium;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-size: $font-size-medium;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+}

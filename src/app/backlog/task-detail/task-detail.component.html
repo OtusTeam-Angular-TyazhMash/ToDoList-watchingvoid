@@ -1,0 +1,27 @@
+<div class="task-detail" *ngIf="task; else noTask">
+  <h2>Edit Task</h2>
+  
+  <div>
+    <label for="title">Title:</label>
+    <input id="title" [(ngModel)]="task.title" class="edit-input" />
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <textarea id="description" [(ngModel)]="task.description" class="edit-textarea"></textarea>
+  </div>
+
+  <div class="status">
+    <span class="status-label">Status:</span>
+    <select [(ngModel)]="task.status" class="status-select">
+      <option value="InProgress">In Progress</option>
+      <option value="Completed">Completed</option>
+    </select>
+  </div>
+
+  <button (click)="saveTask()" class="save-button">Save</button>
+</div>
+
+<ng-template #noTask>
+  <p>Task not found or no data available.</p>
+</ng-template>

@@ -1,25 +1,18 @@
 {
   "todos": [
     {
-      "id": "cfca",
-      "title": "jhgfds",
-      "description": "",
+      "id": "1",
+      "title": "First Task",
+      "description": "This is the first task.",
       "status": "InProgress",
       "completed": false
     },
     {
-      "id": "8cf2",
-      "title": "jhgfd",
-      "description": "",
-      "status": "InProgress",
-      "completed": false
-    },
-    {
-      "id": "2080",
-      "title": "gfd",
-      "description": "",
-      "status": "InProgress",
-      "completed": false
+      "id": "2",
+      "title": "Second Task",
+      "description": "This is the second task.",
+      "status": "Completed",
+      "completed": true
     }
   ]
 }

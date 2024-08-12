@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button/button.component';
 import { TooltipDirective } from './tooltip.directive';
 import { ToastsComponent } from './toasts/toasts.component';
-import { FilterTodosPipe } from '../filter-todos.pipe';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -13,7 +12,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     TooltipDirective,
     ToastsComponent,
     LoadingSpinnerComponent,
-    FilterTodosPipe,
   ],
   imports: [
     CommonModule,
@@ -24,7 +22,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     TooltipDirective,
     ToastsComponent,
     LoadingSpinnerComponent,
-    FilterTodosPipe,
   ]
 })
 export class SharedModule { }
