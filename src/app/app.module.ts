@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppComponent } from './app.component';
-import { ToastsComponent } from './shared/toasts/toasts.component';
+import { ToastComponent } from './shared/toasts/toasts.component';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({

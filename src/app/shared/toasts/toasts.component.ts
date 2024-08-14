@@ -6,13 +6,13 @@ import { ToastService, Toast } from '../service/toast.service';
   templateUrl: './toasts.component.html',
   styleUrls: ['./toasts.component.scss']
 })
-export class ToastsComponent implements OnInit {
+export class ToastComponent implements OnInit {
   toasts: Toast[] = [];
 
   constructor(private toastService: ToastService) {}
 
   ngOnInit(): void {
-    this.toastService.getToasts().subscribe((toasts: Toast[]) => {
+    this.toastService.toasts$.subscribe(toasts => {
       this.toasts = toasts;
     });
   }

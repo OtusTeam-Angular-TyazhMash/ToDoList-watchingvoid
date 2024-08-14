@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoService } from 'src/app/shared/service/todo.service';
-import { Todo } from 'src/app/shared/models/todo.model';
+import { TodoService } from 'src/app/shared/service/task.service';
+import { Todo } from 'src/app/shared/models/task.model';
 
 @Component({
   selector: 'app-task-board',

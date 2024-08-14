@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button/button.component';
 import { TooltipDirective } from './tooltip.directive';
-import { ToastsComponent } from './toasts/toasts.component';
+import { ToastComponent } from './toasts/toasts.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -10,7 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   declarations: [
     ButtonComponent,
     TooltipDirective,
-    ToastsComponent,
+    ToastComponent,
     LoadingSpinnerComponent,
   ],
   imports: [
@@ -20,7 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   exports: [
     ButtonComponent,
     TooltipDirective,
-    ToastsComponent,
+    ToastComponent,
     LoadingSpinnerComponent,
   ]
 })

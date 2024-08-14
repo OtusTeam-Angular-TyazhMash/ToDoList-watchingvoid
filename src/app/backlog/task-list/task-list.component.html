@@ -3,16 +3,16 @@
 
   <div class="filter-controls">
     <label for="status-filter">Filter by status:</label>
-    <select id="status-filter" [(ngModel)]="filter.status" (change)="applyFilter()">
+    <select id="status-filter" (change)="applyFilter($event)">
       <option value="">All</option>
       <option value="InProgress">In Progress</option>
       <option value="Completed">Completed</option>
     </select>
-    <button (click)="filter.status = ''; applyFilter()">Reset Filter</button>
+    <button (click)="applyFilter('')">Reset Filter</button>
   </div>
 
   <ul>
-    <li *ngFor="let task of filteredTasks" (click)="selectTask(task.id!)">
+    <li *ngFor="let task of tasks" (click)="selectTask(task.id!)">
       {{ task.title }}
     </li>
   </ul>
