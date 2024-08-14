@@ -13,6 +13,36 @@
     font-size: $font-size-large;
   }
 
+  .filter-controls {
+    margin-bottom: $padding-medium;
+
+    label {
+      margin-right: $padding-small;
+      font-size: $font-size-medium;
+      color: $text-color;
+    }
+
+    select {
+      padding: $padding-small;
+      font-size: $font-size-medium;
+      margin-right: $padding-small;
+    }
+
+    button {
+      background-color: $primary-color;
+      color: $white-color;
+      padding: $padding-small $padding-medium;
+      border: none;
+      border-radius: $border-radius;
+      cursor: pointer;
+      font-size: $font-size-medium;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+
   ul {
     list-style: none;
     padding: 0;

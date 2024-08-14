@@ -7,8 +7,7 @@ import { Todo } from '../models/todo.model';
   providedIn: 'root'
 })
 export class TodoService {
-  private apiUrl = 'http://localhost:3000/todos'; // URL вашего API
-
+  private apiUrl = 'http://localhost:3000/todos'; // json-server --watch db.json
   constructor(private http: HttpClient) {}
 
   getTodos(): Observable<Todo[]> {
