@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskStateService } from 'src/app/shared/service/task-state.service';
 import { Todo } from 'src/app/shared/models/task.model';
-import { delay, first } from 'rxjs';
 
 @Component({
   selector: 'app-task-detail',
@@ -10,7 +9,7 @@ import { delay, first } from 'rxjs';
   styleUrls: ['./task-detail.component.scss']
 })
 export class TaskDetailComponent implements OnInit {
-  task: Todo | undefined;
+  taskview: Todo | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,41 +17,32 @@ export class TaskDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Получаем id задачи из маршрута
     const id = +this.route.snapshot.paramMap.get('id')!;
-    console.log('Requested task ID:', id);
-  
-    if (id) {
-      this.taskStateService.tasks$.pipe(
-        first(),
-        delay(100)  // Добавление небольшой задержки для проверки
-      ).subscribe(tasks => {
-        console.log('Received tasks after delay:', tasks);
-        const task = tasks.find(task => task.id === id);
-        if (task) {
-          console.log('Task found:', task);
-          this.task = task;
-        } else {
-          console.error(`Task with id ${id} not found.`);
-        }
-      });
-    } else {
-      console.error('No valid task id found in URL.');
-    }
+
+    // Подписываемся на поток задач и находим нужную задачу по id
+    this.taskStateService.tasks$.subscribe(tasks => {
+      this.taskview = tasks.find(task => task.id == id);
+      
+      if (this.taskview) {
+        console.log('Task found:', this.taskview);
+      } else {
+        console.error(`Task with id ${id} not found.`);
+      }
+    });
   }
   
-  
-  
-  
-
+  // Метод для сохранения изменений задачи
   saveTask(): void {
-    if (this.task && this.task.id !== undefined) {
-      this.taskStateService.updateTask(this.task.id, this.task);
+    if (this.taskview && this.taskview.id !== undefined) {
+      this.taskStateService.updateTask(this.taskview.id, this.taskview);
     }
   }
 
+  // Метод для изменения статуса задачи
   onStatusChange(): void {
-    if (this.task && this.task.id !== undefined) {
-      this.taskStateService.updateTask(this.task.id, { completed: this.task.completed });
+    if (this.taskview && this.taskview.id !== undefined) {
+      this.taskStateService.updateTask(this.taskview.id, { completed: this.taskview.completed });
     }
   }
 }

@@ -1,19 +1,19 @@
-<div class="task-detail" *ngIf="task; else noTask">
+<div class="task-detail" *ngIf="taskview; else noTask">
   <h2>Edit Task</h2>
   
   <div>
     <label for="title">Title:</label>
-    <input id="title" [(ngModel)]="task.title" class="edit-input" />
+    <input id="title" [(ngModel)]="taskview.title" class="edit-input" />
   </div>
 
   <div>
     <label for="description">Description:</label>
-    <textarea id="description" [(ngModel)]="task.description" class="edit-textarea"></textarea>
+    <textarea id="description" [(ngModel)]="taskview.description" class="edit-textarea"></textarea>
   </div>
 
   <div class="status">
     <span class="status-label">Status:</span>
-    <select [(ngModel)]="task.status" class="status-select">
+    <select [(ngModel)]="taskview.status" class="status-select">
       <option value="InProgress">In Progress</option>
       <option value="Completed">Completed</option>
     </select>
