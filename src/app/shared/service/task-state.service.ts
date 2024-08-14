@@ -11,7 +11,7 @@ export class TaskStateService {
   private tasksSubject: BehaviorSubject<Todo[]> = new BehaviorSubject<Todo[]>([]);
   private filterSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  public readonly tasks$: Observable<Todo[]> = combineLatest([
+  public tasks$: Observable<Todo[]> = combineLatest([
     this.tasksSubject.asObservable(),
     this.filterSubject.asObservable()
   ]).pipe(
@@ -24,11 +24,12 @@ export class TaskStateService {
     this.loadInitialData();
   }
 
-  private loadInitialData(): void {
-    this.taskService.getTodos().subscribe(tasks => {
-      this.tasksSubject.next(tasks);
-    });
-  }
+//   private loadInitialData(): void {
+//     this.taskService.getTodos().subscribe(tasks => {
+//       console.log('Loaded tasks:', tasks);
+//       this.tasksSubject.next(tasks);
+//     });
+//   }
 
   public setFilter(filter: string): void {
     this.filterSubject.next(filter);
@@ -59,9 +60,30 @@ export class TaskStateService {
     });
   }
 
+//   public getTaskById(id: number): Observable<Todo | undefined> {
+//     return this.tasks$.pipe(
+//       map(tasks => {
+//         console.log('Searching for task with id:', id);
+//         console.log(tasks);
+//         return tasks.find(task => task.id === id);
+//       })
+//     );
+//   }
+private loadInitialData(): void {
+    this.taskService.getTodos().subscribe(tasks => {
+      console.log('Loaded tasks into service:', tasks);
+      this.tasksSubject.next(tasks);
+    });
+  }
+  
   public getTaskById(id: number): Observable<Todo | undefined> {
     return this.tasks$.pipe(
-      map(tasks => tasks.find(task => task.id === id))
+      map(tasks => {
+        console.log('Tasks in state during getTaskById:', tasks.map(task => task.id));
+        return tasks.find(task => task.id === id);
+      })
     );
   }
+  
+  
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskStateService } from 'src/app/shared/service/task-state.service';
 import { Todo } from 'src/app/shared/models/task.model';
+import { delay, first } from 'rxjs';
 
 @Component({
   selector: 'app-task-detail',
@@ -18,10 +19,30 @@ export class TaskDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
-    this.taskStateService.getTaskById(id).subscribe(task => {
-      this.task = task;
-    });
+    console.log('Requested task ID:', id);
+  
+    if (id) {
+      this.taskStateService.tasks$.pipe(
+        first(),
+        delay(100)  // Добавление небольшой задержки для проверки
+      ).subscribe(tasks => {
+        console.log('Received tasks after delay:', tasks);
+        const task = tasks.find(task => task.id === id);
+        if (task) {
+          console.log('Task found:', task);
+          this.task = task;
+        } else {
+          console.error(`Task with id ${id} not found.`);
+        }
+      });
+    } else {
+      console.error('No valid task id found in URL.');
+    }
   }
+  
+  
+  
+  
 
   saveTask(): void {
     if (this.task && this.task.id !== undefined) {
