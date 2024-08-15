@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskStateService } from 'src/app/shared/service/task-state.service';
 import { Todo } from 'src/app/shared/models/task.model';
+import { TranslateService } from '@ngx-translate/core';  // Импортируем TranslateService
 
 @Component({
   selector: 'app-task-detail',
@@ -13,7 +14,8 @@ export class TaskDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private taskStateService: TaskStateService
+    private taskStateService: TaskStateService,
+    private translate: TranslateService  // Добавляем TranslateService
   ) {}
 
   ngOnInit(): void {

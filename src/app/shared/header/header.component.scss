@@ -1,0 +1,60 @@
+/* Общие стили для шапки */
+.header {
+    background-color: #343a40;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+  
+    .navigation {
+      display: flex;
+      align-items: center;
+  
+      a {
+        color: #ffffff;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 16px;
+        transition: color 0.3s ease;
+  
+        &:hover {
+          color: #adb5bd;
+        }
+      }
+    }
+  
+    .language-switcher {
+      display: flex;
+      align-items: center;
+  
+      button {
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+        padding: 5px 10px;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+  
+        &:hover {
+          background-color: white;
+          color: #343a40;
+        }
+  
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+  

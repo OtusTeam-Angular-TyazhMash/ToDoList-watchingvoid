@@ -1,0 +1,24 @@
+{
+  "TASK_DETAIL": {
+    "EDIT_TASK": "Edit Task",
+    "TITLE": "Title",
+    "DESCRIPTION": "Description",
+    "STATUS": "Status",
+    "IN_PROGRESS": "In Progress",
+    "COMPLETED": "Completed",
+    "SAVE": "Save",
+    "NO_TASK": "Task not found or no data available."
+  },
+  "TASK_BOARD": {
+    "IN_PROGRESS": "In Progress",
+    "COMPLETED": "Completed"
+  },
+  "TASK_LIST": {
+    "TITLE": "Tasks",
+    "FILTER_LABEL": "Filter by status:",
+    "FILTER_ALL": "All",
+    "FILTER_IN_PROGRESS": "In Progress",
+    "FILTER_COMPLETED": "Completed",
+    "RESET_FILTER": "Reset Filter"
+  }
+}

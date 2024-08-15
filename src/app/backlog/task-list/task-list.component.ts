@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TaskStateService } from 'src/app/shared/service/task-state.service';
 import { Todo } from 'src/app/shared/models/task.model';
+import { TranslateService } from '@ngx-translate/core';  // Импортируем TranslateService
 
 @Component({
   selector: 'app-task-list',
@@ -11,7 +12,11 @@ import { Todo } from 'src/app/shared/models/task.model';
 export class TaskListComponent implements OnInit {
   tasks: Todo[] = [];
 
-  constructor(private taskStateService: TaskStateService, private router: Router) { }
+  constructor(
+    private taskStateService: TaskStateService,
+    private router: Router,
+    private translate: TranslateService  // Добавляем TranslateService
+  ) { }
 
   ngOnInit(): void {
     this.taskStateService.tasks$.subscribe(tasks => {

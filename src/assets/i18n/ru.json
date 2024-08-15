@@ -1,0 +1,24 @@
+{
+  "TASK_DETAIL": {
+    "EDIT_TASK": "Редактировать задачу",
+    "TITLE": "Название",
+    "DESCRIPTION": "Описание",
+    "STATUS": "Статус",
+    "IN_PROGRESS": "В процессе",
+    "COMPLETED": "Завершено",
+    "SAVE": "Сохранить",
+    "NO_TASK": "Задача не найдена или данные недоступны."
+  },
+  "TASK_BOARD": {
+    "IN_PROGRESS": "В процессе",
+    "COMPLETED": "Завершено"
+  },
+  "TASK_LIST": {
+    "TITLE": "Задачи",
+    "FILTER_LABEL": "Фильтр по статусу:",
+    "FILTER_ALL": "Все",
+    "FILTER_IN_PROGRESS": "В процессе",
+    "FILTER_COMPLETED": "Завершено",
+    "RESET_FILTER": "Сбросить фильтр"
+  }
+}

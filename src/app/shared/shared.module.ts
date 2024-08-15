@@ -5,6 +5,7 @@ import { TooltipDirective } from './tooltip.directive';
 import { ToastComponent } from './toasts/toasts.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     TooltipDirective,
     ToastComponent,
     LoadingSpinnerComponent,
+    HeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     TooltipDirective,
     ToastComponent,
     LoadingSpinnerComponent,
+    HeaderComponent
   ]
 })
 export class SharedModule { }
