@@ -1,0 +1,19 @@
+<div class="task-list">
+  <h2>{{ 'TASK_LIST.TITLE' | translate }}</h2>
+
+  <div class="filter-controls">
+    <label for="status-filter">{{ 'TASK_LIST.FILTER_LABEL' | translate }}</label>
+    <select id="status-filter" (change)="applyFilter($event)">
+      <option value="">{{ 'TASK_LIST.FILTER_ALL' | translate }}</option>
+      <option value="InProgress">{{ 'TASK_LIST.FILTER_IN_PROGRESS' | translate }}</option>
+      <option value="Completed">{{ 'TASK_LIST.FILTER_COMPLETED' | translate }}</option>
+    </select>
+    <button (click)="applyFilter('')">{{ 'TASK_LIST.RESET_FILTER' | translate }}</button>
+  </div>
+
+  <ul>
+    <li *ngFor="let task of tasks" (click)="selectTask(task.id!)">
+      {{ task.title }}
+    </li>
+  </ul>
+</div>

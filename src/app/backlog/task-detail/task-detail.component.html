@@ -1,0 +1,27 @@
+<div class="task-detail" *ngIf="taskview; else noTask">
+  <h2>{{ 'TASK_DETAIL.EDIT_TASK' | translate }}</h2>
+  
+  <div>
+    <label for="title">{{ 'TASK_DETAIL.TITLE' | translate }}:</label>
+    <input id="title" [(ngModel)]="taskview.title" class="edit-input" />
+  </div>
+
+  <div>
+    <label for="description">{{ 'TASK_DETAIL.DESCRIPTION' | translate }}:</label>
+    <textarea id="description" [(ngModel)]="taskview.description" class="edit-textarea"></textarea>
+  </div>
+
+  <div class="status">
+    <span class="status-label">{{ 'TASK_DETAIL.STATUS' | translate }}:</span>
+    <select [(ngModel)]="taskview.status" class="status-select">
+      <option value="InProgress">{{ 'TASK_DETAIL.IN_PROGRESS' | translate }}</option>
+      <option value="Completed">{{ 'TASK_DETAIL.COMPLETED' | translate }}</option>
+    </select>
+  </div>
+
+  <button (click)="saveTask()" class="save-button">{{ 'TASK_DETAIL.SAVE' | translate }}</button>
+</div>
+
+<ng-template #noTask>
+  <p>{{ 'TASK_DETAIL.NO_TASK' | translate }}</p>
+</ng-template>

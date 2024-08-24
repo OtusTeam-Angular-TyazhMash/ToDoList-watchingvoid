@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
 
 const routes: Routes = [
-  {path:"home", component:AppComponent},
-  {path:"", component:ToDoListComponent},
+  { path: '', redirectTo: '/backlog', pathMatch: 'full' },
+  { path: 'backlog', loadChildren: () => import('./backlog/backlog.module').then(m => m.BacklogModule) },
+  { path: 'board', loadChildren: () => import('./board/board.module').then(m => m.BoardModule) },
+  { path: '**', redirectTo: '/backlog' }
 ];
 
 @NgModule({

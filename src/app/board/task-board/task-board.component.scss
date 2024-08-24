@@ -1,0 +1,52 @@
+@import '../../../styles/variables.scss';
+
+
+.task-board {
+  display: flex;
+  justify-content: space-between;
+  height: calc(100vh - 40px);
+  padding: $padding-medium;
+
+  .column {
+    width: 48%;
+    background-color: $background-color;
+    padding: $padding-medium;
+    border-radius: $border-radius;
+    overflow-y: auto;
+    box-shadow: $box-shadow;
+
+    h3 {
+      margin-bottom: $padding-medium;
+      font-size: $font-size-large;
+      color: $text-color;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding: $padding-small;
+        margin-bottom: $padding-small;
+        background-color: $white-color;
+        border-radius: $border-radius;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: $hover-color;
+        }
+
+        &.completed {
+          background-color: $completed-color;
+          color: $white-color;
+        }
+
+        &.in-progress {
+          background-color: $in-progress-color;
+          color: $white-color;
+        }
+      }
+    }
+  }
+}
